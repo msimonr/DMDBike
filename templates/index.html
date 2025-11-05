@@ -1,0 +1,24 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Bicicleta ADU</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="label">Distancia acumulada</div>
+      <div id="km" class="km">{{ "%.2f"|format(km) }}</div>
+    </header>
+    <div class="container">
+      <div class="left">
+        <div id="random-sesion">
+        <!-- acá va a aparecer el que salió sorteado -->
+        </div>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
