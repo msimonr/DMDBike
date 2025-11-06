@@ -1,43 +1,56 @@
 body {
-        background: #101010;
-        color: #fff;
+        background: #e0e0e0;
+        color: #0f0f0f;
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
       }
-      header {
-        text-align: center;
-        padding: 1rem 0 0;
-      }
+
       .label {
         font-size: 1.5rem;
         opacity: 0.8;
       }
+
       .km {
         font-size: 6rem;
         font-weight: bold;
         margin: 1rem 0 2rem;
       }
+
       .container {
         display: flex;
+        margin: auto;
         gap: 2rem;
         padding: 1rem 2rem 2rem;
       }
-      .left {
-        flex: 2;
+
+      h3 {
+        text-align: center;
       }
+      
+      .left {
+        flex: 1;
+      }
+
+      .center {
+        flex: 2;
+        text-align: center;
+      }
+
       .right {
         flex: 1;
-        background: rgba(255,255,255,0.05);
         padding: 1rem;
         border-radius: .5rem;
       }
+
+
       .sesion {
         display: flex;
         align-items: center;
         gap: 1rem;
         margin-bottom: 1rem;
       }
+      
       .sesion img {
         width: 60px;
         height: 60px;
@@ -45,14 +58,20 @@ body {
         border-radius: 6px;
         background: #333;
       }
+
+      /* CLASES EN PICTURE Y MANUAL */
+
       form {
         display: flex;
         flex-direction: column;
         gap: .5rem;
       }
+
+
       input[type="text"], input[type="file"] {
         padding: .4rem;
       }
+
       button {
         padding: .5rem;
         background: #29b;
@@ -60,9 +79,11 @@ body {
         color: #fff;
         cursor: pointer;
       }
+
       button:hover {
         background: #38c;
       }
+
       @media (max-width: 900px) {
         .container {
           flex-direction: column;

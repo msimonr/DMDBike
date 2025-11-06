@@ -6,19 +6,32 @@
     <title>Bicicleta ADU</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
   </head>
   <body>
-    <header>
-      <div class="label">Distancia acumulada</div>
-      <div id="km" class="km">{{ "%.2f"|format(km) }}</div>
-    </header>
     <div class="container">
+
       <div class="left">
+        <h3>Top 10</h3>
+        <ul id="top10-list">
+          <!-- acá JS va a meter los ítems -->
+        </ul>
+      </div>
+
+      <div class="center">
+      <div class="label">Distancia acumulada</div>
+        <div id="km" class="km">{{ "%.2f"|format(km) }}</div>
+        <div id="km_sesion" class="km">{{ "%.2f"|format(km) }}</div>
+      </div>
+
+      <div class="right">
         <div id="random-sesion">
         <!-- acá va a aparecer el que salió sorteado -->
         </div>
       </div>
+
     </div>
+
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   </body>
 </html>

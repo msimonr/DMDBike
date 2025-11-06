@@ -24,6 +24,14 @@ CREATE TABLE IF NOT EXISTS sesiones (
 );
 """)
 
+cur.execute("""
+        CREATE TABLE IF NOT EXISTS sesion_activa (
+            id INTEGER PRIMARY KEY CHECK (id = 1),
+            km_inicio REAL NOT NULL,
+            iniciada_en TEXT NOT NULL
+        );
+    """)
+
 # insertar el registro único de estado si no existe
 cur.execute("SELECT COUNT(*) FROM estado WHERE id = 1;")
 if cur.fetchone()[0] == 0:

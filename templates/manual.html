@@ -1,0 +1,24 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>CARGA MANUAL ADU BIKE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h3>Cargar sesión manual</h3>
+      <form action="{{ url_for('insertar_manual') }}" method="POST" enctype="multipart/form-data">
+        <label>Nombre</label>
+        <input type="text" name="nombre" required>
+        <label>Kilómetros</label>
+        <input type="number" name="km" step="0.01" min="0" placeholder="0.35" required>
+        <label>Foto (opcional)</label>
+        <input type="file" name="foto" accept="image/*" capture="camera">
+        <button type="submit">Guardar manual</button>
+      </form>
+    </div>
+  </body>
+</html>

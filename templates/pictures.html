@@ -8,18 +8,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   </head>
   <body>
-    <div class="container">
-        <h2>Nuevo registro</h2>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-          <input type="hidden" name="token" value="{{ token }}">
-          <label>Nombre</label>
-          <input type="text" name="nombre" placeholder="Quién pedaleó">
-          <label>km</label>
-          <input type="number" name="km_individual" step="0.01" min="0" placeholder="1">
-          <label>Foto</label>
-          <input type="file" name="foto" accept="image/*" capture="camera">
-          <button type="submit">Guardar</button>
-        </form>
-      </div>
+  <div class="container">
+    <form action="{{ url_for('reset_session') }}" method="POST">
+      <button type="submit" class="resetbtn">Reiniciar sesión actual</button>
+    </form>
+  </div>
+  <hr>
+  <div class="container">
+      <h2>Nuevo registro</h2>
+      <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="token" value="{{ token }}">
+        <label>Nombre</label>
+        <input type="text" name="nombre" placeholder="Quién pedaleó">
+        <label>Foto</label>
+        <input type="file" name="foto" accept="image/*" capture="camera">
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+    <a href="{{ url_for('upload_manual') }}">Ir a carga manual</a>
   </body>
 </html>
