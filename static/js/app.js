@@ -46,6 +46,28 @@ function actualizarBarraProgreso(actual, metasArray) {
 }
 
 
+// pra sesion name
+
+function fitSesionName(el, maxEm = 5, minEm = 1.2, step = 0.05) {
+  // ponemos primero el máximo, así el texto crece todo lo que pueda
+  el.style.fontSize = maxEm + "em";
+
+  const parentWidth = el.parentElement.clientWidth;
+
+  // tamaño base del contenedor para convertir px->em si hace falta
+  const parentFontPx = parseFloat(getComputedStyle(el.parentElement).fontSize);
+
+  let fontPx = parseFloat(getComputedStyle(el).fontSize);
+  let fontEm = fontPx / parentFontPx;
+
+  // si se pasa del ancho, vamos bajando
+  while (el.scrollWidth > parentWidth * 0.9 && fontEm > minEm) {
+    fontEm -= step;
+    el.style.fontSize = fontEm + "em";
+  }
+}
+
+
 async function actualizar() {
     try {
         const res = await fetch('/stats');
@@ -56,7 +78,7 @@ async function actualizar() {
         kmTotal_viejo = document.getElementById('km').textContent;
         kmTotal.textContent = displayDistanceText(kmNum)[0]
         document.getElementById('kmUnit').textContent = displayDistanceText(kmNum)[1];
-        document.getElementById('km_sesion').textContent = '🚴‍♂️ ' + displayDistanceText(kmSesion)[0] + ' ' + displayDistanceText(kmSesion)[1];
+        document.getElementById('km_sesion').textContent = displayDistanceText(kmSesion)[0] + ' ' + displayDistanceText(kmSesion)[1];
 
         //Animaciones
         actualizarBarraProgreso(kmNum, metas);
@@ -82,12 +104,14 @@ async function actualizarSesionRandom() {
                 <span class="sesion-name">${data.nombre || ""}</span>
                 ${data.foto 
                   ? `<img src="${data.foto}" class="sesion-img">`
-                  : `<img src="/static/default.png" class="sesion-img">`
+                  : `<img src="/static/images/default.png" class="sesion-img">`
                   }
                 <span class="sesion-distance"><span class="sesion-sumo">Sumó</span> ${displayDistanceText(data.km)[0] + ' '+ displayDistanceText(data.km)[1]}</span>
                 <span class="sesion-date">${displayFecha(data.creado_en)}</span>
             </div>
         `;
+        document.querySelectorAll(".sesion-name").forEach(el => fitSesionName(el));
+        console.log('Bro')
     } catch (e) {
         console.log("Error obteniendo sesión random", e);
     }

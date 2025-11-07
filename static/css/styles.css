@@ -76,7 +76,7 @@ html, body {
 .circle {
   
   width: min(80vh, 80vw);  
-  max-width: calc(100% - 8rem);     
+  max-width: calc(100% - 8rem);
   aspect-ratio: 1 / 1;
   box-sizing: border-box;
 
@@ -206,14 +206,19 @@ html, body {
 
 .sesion {
   display: grid;
+  justify-items: center;
 }
 
 .sesion-name{
-  font-size: 5em;
+  font-size: 5em;          /* tamaño máximo */
+  line-height: 1.1;
   text-align: center;
   margin-bottom: 0.3em;
   font-weight: 600;
   color: var(--diabetes-blue-color);
+  max-width: 90%;          /* no ocupar todo el ancho del panel */
+  white-space: nowrap;     /* que no baje de línea */
+  overflow: hidden;        /* por si acaso */
 }
 
 .sesion-distance{
@@ -232,7 +237,7 @@ html, body {
 .sesion-img {
   width: 100%;
   height: auto;
-  max-height: 1020px;
+  max-height: 800px;
   object-fit: contain;
   border-radius: 1em;
   border: 0.3em solid var(--diabetes-blue-color);
