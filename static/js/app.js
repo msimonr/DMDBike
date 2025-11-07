@@ -1,7 +1,7 @@
 const metas = [14.11, 141.1, 1411];
 
 function displayFecha(date){
-    return new Date(date).getDay() + '/'+ (new Date(date).getMonth()+1) + '/' + new Date(date).getFullYear()
+    return new Date(date).getDate() + '/'+ (new Date(date).getMonth()+1) + '/' + new Date(date).getFullYear()
 }
 
 function displayDistanceText(km){
@@ -79,12 +79,12 @@ async function actualizar() {
         kmTotal.textContent = displayDistanceText(kmNum)[0]
         document.getElementById('kmUnit').textContent = displayDistanceText(kmNum)[1];
         document.getElementById('km_sesion').textContent = displayDistanceText(kmSesion)[0] + ' ' + displayDistanceText(kmSesion)[1];
-
+	console.log(document.getElementById('km_sesion'));
         //Animaciones
         actualizarBarraProgreso(kmNum, metas);
         if(kmTotal_viejo !== kmTotal.textContent){
-          kmTotal.classList.remove("km-updated"); 
-          void kmTotal.offsetWidth;               
+          kmTotal.classList.remove("km-updated");
+          void kmTotal.offsetWidth;
           kmTotal.classList.add("km-updated");
           }
     } catch (e) {
@@ -111,7 +111,6 @@ async function actualizarSesionRandom() {
             </div>
         `;
         document.querySelectorAll(".sesion-name").forEach(el => fitSesionName(el));
-        console.log('Bro')
     } catch (e) {
         console.log("Error obteniendo sesión random", e);
     }
