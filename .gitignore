@@ -205,3 +205,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Ignorar la base de datos local
+bici.db
+
+# Ignorar todo el contenido dentro de la carpeta de subidas
+/static/uploads/
