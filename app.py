@@ -3,6 +3,7 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for, s
 import sqlite3
 import os
 import uuid
+import random
 from datetime import datetime, UTC
 from PIL import Image, ImageOps
 
@@ -113,39 +114,43 @@ def random_session():
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
     
-    cur.execute("SELECT MIN(veces_sorteada) FROM sesiones;")
-    row = cur.fetchone()
     
-    if not row or row[0] is None:
-        conn.close()
-        return jsonify({"ok": False})
-    
-    
-    min_veces = row[0]
-    
-    # Sorteo 
+    #Traer las que nunca hayan salido
     cur.execute("""
         SELECT id, nombre, km, foto, creado_en
         FROM sesiones
-        WHERE veces_sorteada = ?
+        WHERE ultimo_sorteo IS NULL
         ORDER BY RANDOM()
         LIMIT 1;
-    """, (min_veces,))
+    """)
     
-    sesion = cur.fetchone()
+    sesion = cur.fetchone()   
     
-    if not sesion:
-        conn.close()
-        return jsonify({"ok": False})
+    if sesion:
+        sesion_id, nombre, km, foto, creado_en = sesion
+    else:
+        cur.execute("""
+            SELECT id, nombre, km, foto, creado_en
+            FROM sesiones
+            ORDER BY datetime(ultimo_sorteo) ASC
+            LIMIT 5;
+        """)
+        filas = cur.fetchall()
+
+        if not filas:
+            conn.close()
+            return jsonify({"ok": False})
+
+        # Elegir al azar de las 5
+        sesion_id, nombre, km, foto, creado_en = random.choice(filas)
     
-    sesion_id, nombre, km, foto, creado_en = sesion
     
     # Actualizar sorteado
     cur.execute("""
-                UPDATE sesiones
-                SET veces_sorteada = veces_sorteada + 1
-                WHERE id = ?;
-                """, (sesion_id,))
+        UPDATE sesiones
+        SET ultimo_sorteo = ?
+        WHERE id = ?;
+    """, (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), sesion_id))
     
     conn.commit()
     conn.close()

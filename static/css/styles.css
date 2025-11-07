@@ -1,94 +1,318 @@
-body {
-        background: #e0e0e0;
-        color: #0f0f0f;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900; /* porque es variable */
+  font-style: normal;
+  font-display: swap;
+}
 
-      .label {
-        font-size: 1.5rem;
-        opacity: 0.8;
-      }
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
 
-      .km {
-        font-size: 6rem;
-        font-weight: bold;
-        margin: 1rem 0 2rem;
-      }
-
-      .container {
-        display: flex;
-        margin: auto;
-        gap: 2rem;
-        padding: 1rem 2rem 2rem;
-      }
-
-      h3 {
-        text-align: center;
-      }
-      
-      .left {
-        flex: 1;
-      }
-
-      .center {
-        flex: 2;
-        text-align: center;
-      }
-
-      .right {
-        flex: 1;
-        padding: 1rem;
-        border-radius: .5rem;
-      }
+:root {
+  --background-color: #f2f5f8;
+  --diabetes-blue-color: rgb(0, 85, 141);
+  --diabetes-blue-color-rgb: 0, 85, 141;
+  --diabetes-blue-color-shadow: rgba(0, 85, 141, 0.6);
+  --grey-pedal-color: #6e6e6e;
+  --black-color: #0e0e0e;
+  --green-adu: rgb(209, 201, 21);
+  --green-adu-rgb: 209, 201, 21;
+}
 
 
-      .sesion {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-      
-      .sesion img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        border-radius: 6px;
-        background: #333;
-      }
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--background-color);
+  font-family: "Montserrat", Arial, sans-serif;
+  color: var(--black-color);
+}
 
-      /* CLASES EN PICTURE Y MANUAL */
+/* GRID general: tres columnas (izq, centro, der) */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto 1fr;           /* fila 1 ocupa el alto, fila 2 se adapta */
+  min-height: 100vh;
+  align-items: center;
+  justify-items: center;
+}
 
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-      }
+/* izquierda y derecha */
+.left, .right {
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left{
+  margin-left: 1em;
+}
+
+.right{
+  margin-right: 1em;
+}
+
+/* centro: el círculo */
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* CÍRCULO RESPONSIVE Y REDONDO */
+.circle {
+  
+  width: min(80vh, 80vw);  
+  max-width: calc(100% - 8rem);     
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+
+  border-radius: 50%;
+  border: min(3vw, 5em) solid var(--diabetes-blue-color);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 0 100px var(--diabetes-blue-color-shadow);
+}
+
+/* texto dentro del círculo */
+.mensaje-circulo {
+  font-size: 3em;
+  color: var(--black-color);
+  font-weight: 700;
+  margin: 0 0 .5rem;
+}
+
+.km {
+  font-size: 10em;
+  font-weight: 700;
+  color: var(--diabetes-blue-color);
+  margin: 0;
+  transition: .4s ease;
+}
+
+#kmUnit {
+  font-size: 8em;
+  font-weight: 700;
+  color: var(--diabetes-blue-color);
+  margin: 0;
+}
+
+#km_sesion {
+  font-size: 3em;
+  color: var(--grey-pedal-color);
+  margin-top: .4rem;
+}
+
+.total-data {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.top10-header {
+  display: flex;
+  align-items: end;
+}
+
+.adu-logo {
+  height: 4.5em;
+  width: auto;
+  display: block;
+}
+
+.top10-title {
+  font-size: 2.5em;
+  margin: 0;             
+  line-height: 1;
+  font-weight: 800; 
+  color: var(--diabetes-blue-color);
+  text-transform: uppercase;
+}
+
+.divider-top10 {
+  border: 0;
+  border-top: 0.2em solid var(--diabetes-blue-color); /* mismo azul */
+  margin: 0.5rem 0 0.8rem;
+  width: 100%;
+}
 
 
-      input[type="text"], input[type="file"] {
-        padding: .4rem;
-      }
+#top10-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
 
-      button {
-        padding: .5rem;
-        background: #29b;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-      }
+.top-entry{
+    font-size: 1.3em;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto; /* pos | nombre | km */
+    column-gap: .5rem;
+    margin-bottom: 0.5em;
+    align-items: center;
+    padding: .4rem .6rem;
+    border-radius: .4rem;
+  }
 
-      button:hover {
-        background: #38c;
-      }
+.number-top{
+  font-weight: 600;
+}
 
-      @media (max-width: 900px) {
-        .container {
-          flex-direction: column;
-        }
-        .km {
-          font-size: 4rem;
-        }
-      }
+.name-top{
+  word-break: break-word;
+}
+
+.distance-top{
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.date-top {
+  grid-row: 2;
+  grid-column: 3;
+  font-size: 1rem;
+  color: var(--grey-pedal-colors);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* filas alternadas */
+.top-entry:nth-child(odd) {
+  background: rgba(var(--diabetes-blue-color-rgb), 0.05);
+}
+
+.top-entry:nth-child(even) {
+  background: rgba(var(--green-adu-rgb), 0.05);
+}
+
+/* IMÁGENES en panel derecho */
+
+.sesion {
+  display: grid;
+}
+
+.sesion-name{
+  font-size: 5em;
+  text-align: center;
+  margin-bottom: 0.3em;
+  font-weight: 600;
+  color: var(--diabetes-blue-color);
+}
+
+.sesion-distance{
+  font-size: 4em;
+  text-align: center;
+  margin-top: 0.3em;
+  font-weight: 600;
+  color: var(--diabetes-blue-color);
+}
+
+.sesion-date{
+  font-size: 2em;
+  text-align: center;
+}
+
+.sesion-img {
+  width: 100%;
+  height: auto;
+  max-height: 1020px;
+  object-fit: contain;
+  border-radius: 1em;
+  border: 0.3em solid var(--diabetes-blue-color);
+  display: block;
+  margin: auto auto;
+}
+
+
+.progress-wrapper {
+  width: min(420px, 80vw);
+  margin-top: 1rem;
+  font-size: .85rem;
+
+  grid-column: 1 / 4;
+  grid-row: 1;
+  padding: 0 1.5rem 1.5rem;
+}
+
+/* contenedor de la barra */
+.progress-bar {
+  position: relative;
+  width: 100%;
+  height: 1.5em;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.08);
+}
+
+/* relleno */
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--green-adu), var(--diabetes-blue-color));
+  border-radius: 999px;
+  transition: width .4s ease;
+}
+
+/* líneas que marcan los tramos */
+.progress-marker {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: 0.5em;
+  height: 100%;
+  background: var(--diabetes-blue-color-shadow);
+  pointer-events: none;
+}
+
+/* etiquetas abajo */
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .35rem;
+  color: var(--black-color);
+}
+
+.progress-labels span {
+  font-size: 1.5em;
+}
+
+
+.km-updated {
+  animation: pop 0.35s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1);   opacity: 1; }
+  30%  { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .left, .right {
+    width: 100%;
+    text-align: center;
+  }
+}

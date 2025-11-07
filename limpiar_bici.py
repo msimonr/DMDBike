@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-limpiar_bici.py
-Resetea la base bici.db y borra sesiones.
-Opcional: limpia las imágenes guardadas.
-"""
 
 import os
 import sqlite3

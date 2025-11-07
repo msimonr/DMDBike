@@ -24,6 +24,7 @@ def agregar_distancia(metros: float):
     row = cur.fetchone()
     km_actual = row[0] if row else 0.0
     km_nuevo = km_actual + (metros / 1000.0)
+    print('km_actual:', km_actual)
     cur.execute(
         "UPDATE estado SET km = ?, actualizado_en = ? WHERE id = 1;",
         (km_nuevo, datetime.now(UTC).isoformat())

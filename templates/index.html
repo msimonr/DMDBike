@@ -6,22 +6,53 @@
     <title>Bicicleta ADU</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icono.png') }}">
   </head>
   <body>
     <div class="container">
 
-      <div class="left">
-        <h3>Top 10</h3>
-        <ul id="top10-list">
-          <!-- acá JS va a meter los ítems -->
-        </ul>
+       <div class="progress-wrapper">
+      <div class="progress-bar multi">
+        <div class="progress-fill" id="progress-fill"></div>
+
+        <!-- marcas visuales -->
+        <div class="progress-marker" style="left: 33.33%"></div>
+        <div class="progress-marker" style="left: 66.66%"></div>
       </div>
 
+      <div class="progress-labels">
+      <span></span>
+      <span id="label-1">meta1</span>
+      <span id="label-2">meta2</span>
+      <span id="label-3">meta3</span>
+      </div>
+    </div>
+
+
+
+      <div class="left">
+        <div id="top10">
+          <div class="top10-header">
+            <img class="adu-logo" src="{{ url_for('static', filename='images/logo_small.png') }}" alt="ADU">
+            <h3 class="top10-title">Top 10</h3>
+          </div>
+          <hr class="divider-top10">
+          <ul id="top10-list">
+          <!-- acá JS va a meter los ítems -->
+          </ul>
+        </div>
+      </div>
       <div class="center">
-      <div class="label">Distancia acumulada</div>
-        <div id="km" class="km">{{ "%.2f"|format(km) }}</div>
-        <div id="km_sesion" class="km">{{ "%.2f"|format(km) }}</div>
+
+        <div class="circle">
+          <p class="mensaje-circulo">Vamos sumando</p>
+          <div class="total-data">
+            <p id="km" class="km">km_total</p>
+            <p id="kmUnit" class="km">km_total</p>
+          </div>
+          <p id="km_sesion" class="km">km_sesion</p>
+        </div>
+        
       </div>
 
       <div class="right">

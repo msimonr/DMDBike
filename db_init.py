@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS sesiones (
     nombre TEXT,
     km REAL,
     foto TEXT,
-    veces_sorteada INTEGER NOT NULL DEFAULT 0,
+    ultimo_sorteo TEXT,
     creado_en TEXT NOT NULL
 );
 """)
@@ -39,6 +39,8 @@ if cur.fetchone()[0] == 0:
         "INSERT INTO estado (id, km, actualizado_en) VALUES (1, 0.0, ?);",
         (datetime.now(UTC).isoformat(),)
 )
+    
+    
 
 conn.commit()
 conn.close()
