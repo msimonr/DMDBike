@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>CARGA MANUAL ADU BIKE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loadstyles.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icono.png') }}">
   </head>
   <body>
@@ -17,8 +17,8 @@
         <label>Kilómetros</label>
         <input type="number" name="km" step="0.01" min="0" placeholder="0.35" required>
         <label>Foto (opcional)</label>
-        <input type="file" name="foto" accept="image/*" capture="camera">
-        <button type="submit">Guardar manual</button>
+        <input type="file" name="foto" accept="image/*" capture="camera" required>
+        <button type="submit" class="guardar">Guardar manual</button>
       </form>
     </div>
   </body>
