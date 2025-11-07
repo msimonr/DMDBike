@@ -80,7 +80,10 @@ async function actualizarSesionRandom() {
         cont.innerHTML = `
             <div class="sesion">
                 <span class="sesion-name">${data.nombre || ""}</span>
-                ${data.foto ? `<img src="${data.foto}" class="sesion-img">` : ""}
+                ${data.foto 
+                  ? `<img src="${data.foto}" class="sesion-img">`
+                  : `<img src="/static/default.png" class="sesion-img">`
+                  }
                 <span class="sesion-distance"><span class="sesion-sumo">Sumó</span> ${displayDistanceText(data.km)[0] + ' '+ displayDistanceText(data.km)[1]}</span>
                 <span class="sesion-date">${displayFecha(data.creado_en)}</span>
             </div>
