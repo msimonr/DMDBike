@@ -20,13 +20,6 @@ def reset_db():
     # borrar sesiones
     cur.execute("DELETE FROM sesiones;")
 
-    # si tenés la columna veces_sorteada, la podés reiniciar así:
-    try:
-        cur.execute("UPDATE sesiones SET veces_sorteada = 0;")
-    except sqlite3.OperationalError:
-        # la tabla quizá no tenga esa columna, no pasa nada
-        pass
-
     conn.commit()
     conn.close()
     print("✔ Base reseteada (km=0, sesiones borradas).")
