@@ -2,6 +2,7 @@
 
 import os
 import sqlite3
+from datetime import datetime, UTC
 
 DB_PATH = "bici.db"
 UPLOADS_DIR = os.path.join("static", "uploads")
@@ -19,6 +20,10 @@ def reset_db():
 
     # borrar sesiones
     cur.execute("DELETE FROM sesiones;")
+    
+    #poner sesion_activa en 0
+    cur.execute("UPDATE sesion_activa SET km_inicio = 0.0, iniciada_en = ? WHERE id = 1;",
+    (datetime.now(UTC).isoformat(),))
 
     conn.commit()
     conn.close()

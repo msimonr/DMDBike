@@ -38,6 +38,9 @@ if cur.fetchone()[0] == 0:
     cur.execute(
         "INSERT INTO estado (id, km, actualizado_en) VALUES (1, 0.0, ?);",
         (datetime.now(UTC).isoformat(),)
+    cur.execute(
+        "INSERT INTO sesion_activa (id, km_inicio, iniciada_en) VALUES (1, 0.0, ?);",
+        (datetime.now(UTC).isoformat(),)
 )
     
     
