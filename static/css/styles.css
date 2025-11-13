@@ -115,8 +115,8 @@ html, body {
 }
 
 #km_sesion {
-  font-size: 3em;
-  color: var(--grey-pedal-color);
+  font-size: 3.5em;
+  color: var(--black-color);
   margin-top: .4rem;
 }
 

@@ -78,7 +78,7 @@ async function actualizar() {
         kmTotal_viejo = document.getElementById('km').textContent;
         kmTotal.textContent = displayDistanceText(kmNum)[0]
         document.getElementById('kmUnit').textContent = displayDistanceText(kmNum)[1];
-        document.getElementById('km_sesion').textContent = displayDistanceText(kmSesion)[0] + ' ' + displayDistanceText(kmSesion)[1];
+        document.getElementById('km_sesion').textContent = '🚴‍♂️ '+displayDistanceText(kmSesion)[0] + ' ' + displayDistanceText(kmSesion)[1];
 	console.log(document.getElementById('km_sesion'));
         //Animaciones
         actualizarBarraProgreso(kmNum, metas);
