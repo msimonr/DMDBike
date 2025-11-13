@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Sincronizar hora - Bicicleta ADU</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Si querés, podés reutilizar tu CSS general -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <header>
+      <h2>Sincronizar hora del sistema</h2>
+      <p><a href="{{ url_for('upload_pictures') }}">⬅ Volver a la pantalla principal</a></p>
+    </header>
+
+    <main style="padding: 1rem;">
+      <div id="sync-time-card" style="max-width:420px;padding:12px;border:1px solid #ddd;border-radius:12px;">
+        <h4 style="margin:0 0 8px;">Sincronizar hora del sistema</h4>
+
+        <p style="margin:4px 0;">
+          Hora detectada en este dispositivo:
+          <strong id="hora-local">--</strong>
+        </p>
+
+        <button id="btn-sync" style="padding:8px 12px;border-radius:8px;cursor:pointer;">
+          Usar esta hora
+        </button>
+
+        <div id="sync-status" style="margin-top:8px;font-size:0.95rem;"></div>
+      </div>
+    </main>
+
+    <script>
+      // Convierte Date() a "YYYY-MM-DD HH:MM:SS" usando la zona local del dispositivo
+      function formatLocal(date) {
+        const pad = (n) => String(n).padStart(2, '0');
+        const y = date.getFullYear();
+        const m = pad(date.getMonth() + 1);
+        const d = pad(date.getDate());
+        const hh = pad(date.getHours());
+        const mm = pad(date.getMinutes());
+        const ss = pad(date.getSeconds());
+        return `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+      }
+
+      // Muestra la hora local “en vivo”
+      const horaEl = document.getElementById('hora-local');
+      function refreshClock() {
+        horaEl.textContent = formatLocal(new Date());
+      }
+      refreshClock();
+      setInterval(refreshClock, 1000);
+
+      // Envía la hora al endpoint Flask
+      document.getElementById('btn-sync').addEventListener('click', async () => {
+        const statusEl = document.getElementById('sync-status');
+        statusEl.textContent = 'Sincronizando...';
+
+        // Usamos url_for para no hardcodear la ruta
+        const url = "{{ url_for('sync_time') }}";
+        const hora = formatLocal(new Date());
+
+        try {
+          const resp = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ hora })
+          });
+          const data = await resp.json();
+          if (data.ok) {
+            statusEl.textContent = `✅ Listo: ${data.msg || 'Hora actualizada.'}`;
+          } else {
+            statusEl.textContent = `⚠️ Error: ${data.error || 'No se pudo actualizar.'}`;
+          }
+        } catch (e) {
+          statusEl.textContent = '⚠️ No se pudo conectar al servidor.';
+        }
+      });
+    </script>
+  </body>
+</html>

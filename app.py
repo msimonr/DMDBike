@@ -64,6 +64,22 @@ def get_or_refresh_sesion(refresh=True): # Si no hay sesion la crea, si hay la d
     conn.close()
     return {"km_inicio": km_inicio, "iniciada_en": iniciada_en, "minutos": mins}
 
+
+
+@app.route("/sync")
+def sync_view():
+    return render_template("sync.html")
+
+@app.route("/sync_time", methods=["POST"])
+def sync_time():
+    data = request.get_json()
+    hora = data.get("hora")
+    try:
+        os.system(f"sudo date -s '{hora}'")
+        return jsonify({"ok": True, "msg": f"Hora del sistema actualizada a {hora}"})
+    except Exception as e:
+        return jsonify({"ok": False, "error": str(e)})
+
 @app.route("/top_10")
 def get_top_10():
     conn = sqlite3.connect(DB_PATH)
@@ -119,7 +135,7 @@ def random_session():
     cur.execute("""
         SELECT id, nombre, km, foto, creado_en
         FROM sesiones
-        WHERE ultimo_sorteo IS NULL
+        WHERE ultimo_sorteo IS NULL AND km > 0
         ORDER BY RANDOM()
         LIMIT 1;
     """)
@@ -132,6 +148,7 @@ def random_session():
         cur.execute("""
             SELECT id, nombre, km, foto, creado_en
             FROM sesiones
+            WHERE km > 0
             ORDER BY datetime(ultimo_sorteo) ASC
             LIMIT 5;
         """)
