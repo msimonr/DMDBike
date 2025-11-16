@@ -211,3 +211,6 @@ bici.db
 
 # Ignorar todo el contenido dentro de la carpeta de subidas
 /static/uploads/
+
+#Ignora backups, deben ser manejados en google drive o similar
+/backups_bike

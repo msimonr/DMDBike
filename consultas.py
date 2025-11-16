@@ -46,7 +46,17 @@ def reemplazar_dia(old_day: str, new_day: str):
     conn.commit()
     conn.close()
 
-    
+def getName(name):
+    conn = sqlite3.connect(DB_PATH)
+    cur = conn.cursor()
+    cur.execute("""
+    SELECT *
+    FROM sesiones  
+    WHERE nombre = ?;
+    """, (name,))
+    row = cur.fetchone()
+    conn.close()
+    return row
 
 if __name__ == "__main__":
     obtener_sesiones_con_km()

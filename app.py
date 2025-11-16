@@ -85,7 +85,6 @@ def get_top_10():
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
     
-    #Get top 10
     cur.execute("""
         SELECT id, nombre, km, creado_en
         FROM sesiones
@@ -108,7 +107,6 @@ def get_top_10():
         
     return jsonify({"ok": True, "top10": top10})
 
-#:: Routes ::
 @app.route("/reset_session", methods=["POST"])
 def reset_session():
     km_actual = get_km_actual()
@@ -126,7 +124,7 @@ def reset_session():
 
 @app.route("/random_session")
 def random_session():
-    #Conexion
+
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
     
@@ -180,9 +178,6 @@ def random_session():
         "foto": url_for('static', filename=f"uploads/{foto}") if foto else None,
         "creado_en": creado_en
     })
-    
-    
-
 
 @app.route("/")
 def index():
@@ -211,6 +206,7 @@ def stats():
 @app.route("/upload", methods=["POST"])
 def upload():
     token = request.form.get("token")
+    
     #evita reenvios
     if not token or token == session.get("last_token"):
         return redirect(url_for("upload_pictures"))
@@ -221,7 +217,6 @@ def upload():
     ses_bike = get_or_refresh_sesion(False)
     km_total = get_km_actual()
     
-    #Calcular delta
     km_individual = km_total - ses_bike['km_inicio']
     if (km_individual < 0):
         km_individual = 0.0
@@ -243,6 +238,7 @@ def upload():
         if img.mode in ("RGBA", "P"):
             img = img.convert("RGB")
         img.thumbnail((1024, 1024))
+        
         # guardar comprimido
         img.save(save_path, "WEBP", quality=70, method=6)
 

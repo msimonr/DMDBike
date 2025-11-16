@@ -7,7 +7,7 @@ function displayFecha(date){
 function displayDistanceText(km){
     km_updt = Math.round(km * 10000) / 10000; //Redondeado a 4 digitos
     if(km_updt < 1){
-        return [String(Math.round(km_updt* 1000)) , 'm']; // 0.734 km -> 734 m
+        return [String(Math.round(km_updt* 1000)) , 'm'];
     }
     return [km_updt.toFixed(1), 'km'];
 }
@@ -16,29 +16,24 @@ function actualizarBarraProgreso(actual, metasArray) {
   const fill = document.getElementById("progress-fill");
   if (!fill || !metasArray || metasArray.length === 0) return;
 
-  // metasArray = [14, 141, 1411]
+  // metasArray = [14.11, 141.1, 1411]
   const [m1, m2, m3] = metasArray;
-  const tramoAncho = 100 / metasArray.length;  // 3 metas => 33.333...% cada tramo
+  const tramoAncho = 100 / metasArray.length;
   let porcentaje = 0;
 
   if (actual <= m1) {
-    // estamos en el 1er tramo
     porcentaje = (actual / m1) * tramoAncho;
   } else if (actual <= m2) {
-    // 2do tramo: ya tenemos 1 tramo completo + la parte del 2do
-    const avanceTramo = (actual - m1) / (m2 - m1); // 0..1
+    const avanceTramo = (actual - m1) / (m2 - m1);
     porcentaje = tramoAncho + avanceTramo * tramoAncho;
   } else {
-    // 3er tramo (hasta m3)
-    const avanceTramo = (actual - m2) / (m3 - m2); // 0..1
+    const avanceTramo = (actual - m2) / (m3 - m2);
     porcentaje = tramoAncho * 2 + avanceTramo * tramoAncho;
   }
 
-  // no pasarse
   porcentaje = Math.min(porcentaje, 100);
   fill.style.width = porcentaje + "%";
 
-  // actualizar etiquetas debajo si existen
   metasArray.forEach((meta, idx) => {
     const label = document.getElementById(`label-${idx + 1}`);
     if (label) label.textContent = meta + " km";
@@ -46,21 +41,14 @@ function actualizarBarraProgreso(actual, metasArray) {
 }
 
 
-// pra sesion name
-
 function fitSesionName(el, maxEm = 5, minEm = 1.2, step = 0.05) {
-  // ponemos primero el máximo, así el texto crece todo lo que pueda
   el.style.fontSize = maxEm + "em";
-
   const parentWidth = el.parentElement.clientWidth;
-
-  // tamaño base del contenedor para convertir px->em si hace falta
   const parentFontPx = parseFloat(getComputedStyle(el.parentElement).fontSize);
 
   let fontPx = parseFloat(getComputedStyle(el).fontSize);
   let fontEm = fontPx / parentFontPx;
 
-  // si se pasa del ancho, vamos bajando
   while (el.scrollWidth > parentWidth * 0.9 && fontEm > minEm) {
     fontEm -= step;
     el.style.fontSize = fontEm + "em";
@@ -79,7 +67,8 @@ async function actualizar() {
         kmTotal.textContent = displayDistanceText(kmNum)[0]
         document.getElementById('kmUnit').textContent = displayDistanceText(kmNum)[1];
         document.getElementById('km_sesion').textContent = '🚴‍♂️ '+displayDistanceText(kmSesion)[0] + ' ' + displayDistanceText(kmSesion)[1];
-	console.log(document.getElementById('km_sesion'));
+	      console.log(document.getElementById('km_sesion'));
+
         //Animaciones
         actualizarBarraProgreso(kmNum, metas);
         if(kmTotal_viejo !== kmTotal.textContent){
@@ -124,7 +113,7 @@ async function actualizarTop10() {
     if (!data.ok) return;
 
     const ul = document.getElementById('top10-list');
-    ul.innerHTML = ''; // limpio lo anterior
+    ul.innerHTML = '';
 
     data.top10.forEach((item, idx) => {
 

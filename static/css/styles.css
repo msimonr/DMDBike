@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Montserrat";
   src: url("../fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
-  font-weight: 100 900; /* porque es variable */
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -34,17 +34,15 @@ html, body {
   color: var(--black-color);
 }
 
-/* GRID general: tres columnas (izq, centro, der) */
 .container {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: auto 1fr;           /* fila 1 ocupa el alto, fila 2 se adapta */
+  grid-template-rows: auto 1fr;
   min-height: 100vh;
   align-items: center;
   justify-items: center;
 }
 
-/* izquierda y derecha */
 .left, .right {
   height: 100%;
   padding: 1rem;
@@ -62,7 +60,6 @@ html, body {
   margin-right: 1em;
 }
 
-/* centro: el círculo */
 .center {
   display: flex;
   flex-direction: column;
@@ -72,7 +69,6 @@ html, body {
   width: 100%;
 }
 
-/* CÍRCULO RESPONSIVE Y REDONDO */
 .circle {
   
   width: min(80vh, 80vw);  
@@ -91,7 +87,6 @@ html, body {
   box-shadow: 0 0 100px var(--diabetes-blue-color-shadow);
 }
 
-/* texto dentro del círculo */
 .mensaje-circulo {
   font-size: 3em;
   color: var(--black-color);
@@ -147,7 +142,7 @@ html, body {
 
 .divider-top10 {
   border: 0;
-  border-top: 0.2em solid var(--diabetes-blue-color); /* mismo azul */
+  border-top: 0.2em solid var(--diabetes-blue-color);
   margin: 0.5rem 0 0.8rem;
   width: 100%;
 }
@@ -162,7 +157,7 @@ html, body {
 .top-entry{
     font-size: 1.3em;
     display: grid;
-    grid-template-columns: 2.5rem 1fr auto; /* pos | nombre | km */
+    grid-template-columns: 2.5rem 1fr auto;
     column-gap: .5rem;
     margin-bottom: 0.5em;
     align-items: center;
@@ -193,7 +188,6 @@ html, body {
   white-space: nowrap;
 }
 
-/* filas alternadas */
 .top-entry:nth-child(odd) {
   background: rgba(var(--diabetes-blue-color-rgb), 0.05);
 }
@@ -202,23 +196,21 @@ html, body {
   background: rgba(var(--green-adu-rgb), 0.05);
 }
 
-/* IMÁGENES en panel derecho */
-
 .sesion {
   display: grid;
   justify-items: center;
 }
 
 .sesion-name{
-  font-size: 5em;          /* tamaño máximo */
+  font-size: 5em;      
   line-height: 1.1;
   text-align: center;
   margin-bottom: 0.3em;
   font-weight: 600;
   color: var(--diabetes-blue-color);
-  max-width: 90%;          /* no ocupar todo el ancho del panel */
-  white-space: nowrap;     /* que no baje de línea */
-  overflow: hidden;        /* por si acaso */
+  max-width: 90%;         
+  white-space: nowrap;     
+  overflow: hidden;  
 }
 
 .sesion-distance{
@@ -256,7 +248,6 @@ html, body {
   padding: 0 1.5rem 1.5rem;
 }
 
-/* contenedor de la barra */
 .progress-bar {
   position: relative;
   width: 100%;
@@ -267,7 +258,6 @@ html, body {
   box-shadow: inset 0 0 4px rgba(0,0,0,0.08);
 }
 
-/* relleno */
 .progress-fill {
   height: 100%;
   width: 0;
@@ -276,7 +266,6 @@ html, body {
   transition: width .4s ease;
 }
 
-/* líneas que marcan los tramos */
 .progress-marker {
   position: absolute;
   top: 0;
@@ -287,7 +276,6 @@ html, body {
   pointer-events: none;
 }
 
-/* etiquetas abajo */
 .progress-labels {
   display: flex;
   justify-content: space-between;
