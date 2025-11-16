@@ -7,7 +7,7 @@ Estas son algunas de las preguntas disparadoras que incentivaron esta propuesta.
 Este proyecto registra la distancia recorrida en una bicicleta común utilizando un rodillo de ciclismo, un **sensor Hall** y un **imán** en la rueda. Una **Raspberry Pi 4** procesa los datos del sensor, mantiene un registro confiable de los kilómetros y muestra la información en tiempo real en una pantalla/TV.
 
 ![Pantalla principal](docs/images/DSC00293.jpg)
-![Demo](docs/images/demo.webm)
+![Demo](docs/images/demo.gif)
 
 ## 🎯 Caso de uso
 
