@@ -1,3 +1,33 @@
+<p align="center">
+
+  <!-- Licencia -->
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/Licencia-MIT-success.svg" alt="Licencia MIT">
+  </a>
+
+  <!-- Versión de Python -->
+  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python 3.13.5">
+
+  <!-- Flask -->
+  <img src="https://img.shields.io/badge/Backend-Flask-000000?logo=flask&logoColor=white" alt="Flask">
+
+  <!-- Raspberry Pi -->
+  <img src="https://img.shields.io/badge/Hardware-Raspberry%20Pi%204B-C51A4A?logo=raspberrypi&logoColor=white" alt="Raspberry Pi 4B">
+
+  <!-- Estado del proyecto -->
+  <img src="https://img.shields.io/badge/Estado-En%20uso%20en%20eventos-brightgreen" alt="Estado del proyecto">
+  
+  <img src="https://img.shields.io/badge/Desarrollo-Activo-blue" alt="Desarrollo activo">
+
+  <!-- Hecho con amor -->
+  <img src="https://img.shields.io/badge/Hecho%20con-%E2%9D%A4%EF%B8%8F%20en%20Uruguay-ff69b4" alt="Hecho con amor en Uruguay">
+
+  <!-- X personas pedalearon -->
+<img src="https://img.shields.io/badge/166%20personas-pedalearon-lightblue" alt="166 personas pedalearon">
+
+</p>
+
+
 # DMDBike: promoviendo actividad física mediante un objetivo comunitario
 
 ¿Cómo promover la actividad física en un evento masivo? ¿Es posible hacerlo si se dispone de poco espacio y un tiempo limitado por cada participante? ¿Cómo hacer que sea divertido y desafiante?
