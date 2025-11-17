@@ -6,17 +6,19 @@ import uuid
 import random
 from datetime import datetime, UTC
 from PIL import Image, ImageOps
+from dotenv import load_dotenv
 
+load_dotenv()
 
-DB_PATH = "bici.db"
-UPLOAD_FOLDER = os.path.join("static", "uploads")
-MAX_MINUTOS_SESION = 30
+DB_PATH = os.getenv("DB_PATH", "bici.db")
+UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER", os.path.join("static", "uploads"))
+MAX_MINUTOS_SESION = int(os.getenv("MAX_MINUTOS_SESION", "30"))
 
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app = Flask(__name__)
-app.secret_key = "14NOV2025MFMF"
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-no-usar-en-produccion")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 

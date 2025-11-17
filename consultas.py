@@ -1,7 +1,11 @@
 import sqlite3
 from datetime import datetime, UTC
+import os
+from dotenv import load_dotenv
 
-DB_PATH = "bici.db"
+load_dotenv()
+
+DB_PATH = os.getenv("DB_PATH", "bici.db")
 
 def obtener_sesiones_con_km():
     conn = sqlite3.connect(DB_PATH)

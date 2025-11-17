@@ -1,8 +1,14 @@
 # db_init.py
 import sqlite3
 from datetime import datetime, UTC
+from dotenv import load_dotenv
+import os
 
-conn = sqlite3.connect("bici.db")
+load_dotenv()
+
+DB_PATH = os.getenv("DB_PATH", "bici.db")
+
+conn = sqlite3.connect(DB_PATH)
 cur = conn.cursor()
 
 cur.execute("""

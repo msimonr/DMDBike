@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
+from dotenv import load_dotenv
 import os
 import sqlite3
 from datetime import datetime, UTC
 
-DB_PATH = "bici.db"
-UPLOADS_DIR = os.path.join("static", "uploads")
+
+load_dotenv()
+
+DB_PATH = os.getenv("DB_PATH", "bici.db")
+UPLOADS_DIR = os.getenv("UPLOAD_FOLDER", os.path.join("static", "uploads"))
 
 def reset_db():
     if not os.path.exists(DB_PATH):

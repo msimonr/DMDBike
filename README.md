@@ -7,7 +7,6 @@ Estas son algunas de las preguntas disparadoras que incentivaron esta propuesta.
 Este proyecto registra la distancia recorrida en una bicicleta común utilizando un rodillo de ciclismo, un **sensor Hall** y un **imán** en la rueda. Una **Raspberry Pi 4** procesa los datos del sensor, mantiene un registro confiable de los kilómetros y muestra la información en tiempo real en una pantalla/TV.
 
 ![Pantalla principal](docs/images/DSC00293.jpg)
-![Demo](docs/images/demo.gif)
 
 ## 🎯 Caso de uso
 
@@ -21,6 +20,9 @@ Su propósito es fomentar la actividad física y la participación comunitaria, 
 - La distancia acumulada por todos los participantes.
 - El nombre, foto y distancia que aportan los distintos participantes.
 - Un ranking con el nombre de los participantes que aportaron mayor distancia.
+- Un conjunto de metas definidas con una barra de progreso.
+
+![Demo](docs/images/demo.gif)
 
 El sistema está pensado para eventos masivos, ferias de salud, actividades escolares, jornadas deportivas y contextos donde se busque **visibilizar el movimiento y generar motivación colectiva**.
 
@@ -88,6 +90,15 @@ Asegurar las siguientes dependencias (normalmente ya vienen instaladas):
 - Flask
 - Pillow
 - RPi.GPIO
+- dotenv
+
+### Variables de entorno
+```env
+FLASK_SECRET_KEY="Cambiar por clave"
+DB_PATH="Path de db, por defecto bici.db"
+UPLOAD_FOLDER=static/uploads
+MAX_MINUTOS_SESION=30
+```
 
 ### Conexión de sensor
 

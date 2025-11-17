@@ -3,8 +3,12 @@ import sqlite3
 from datetime import datetime, UTC
 import time
 import RPi.GPIO as GPIO
+import os
+from dotenv import load_dotenv
 
-DB_PATH = "bici.db"
+load_dotenv()
+
+DB_PATH = os.getenv("DB_PATH", "bici.db")
 
 # CONFIGURACIÓN DE TU RUEDA
 WHEEL_CIRCUMFERENCE_M = 2.10  # 2,10 m de perímetro
