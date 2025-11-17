@@ -1,34 +1,47 @@
+# DMDBike: promoviendo actividad física mediante un objetivo comunitario
+
 <p align="center">
 
   <!-- Licencia -->
   <a href="LICENSE">
-    <img src="https://img.shields.io/badge/Licencia-MIT-success.svg" alt="Licencia MIT">
-  </a>
-
-  <!-- Versión de Python -->
-  <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python 3.13.5">
-
-  <!-- Flask -->
-  <img src="https://img.shields.io/badge/Backend-Flask-000000?logo=flask&logoColor=white" alt="Flask">
-
-  <!-- Raspberry Pi -->
-  <img src="https://img.shields.io/badge/Hardware-Raspberry%20Pi%204B-C51A4A?logo=raspberrypi&logoColor=white" alt="Raspberry Pi 4B">
-
-  <!-- Estado del proyecto -->
-  <img src="https://img.shields.io/badge/Estado-En%20uso%20en%20eventos-white" alt="Estado del proyecto">
-  
-  <img src="https://img.shields.io/badge/Desarrollo-Activo-yellow" alt="Desarrollo activo">
-
-  <!-- Hecho con amor -->
-  <img src="https://img.shields.io/badge/Hecho%20con-%E2%9D%A4%EF%B8%8F%20en%20Uruguay-80BFFF" alt="Hecho con amor en Uruguay">
-
-  <!-- X personas pedalearon -->
-<img src="https://img.shields.io/badge/166%20personas-pedalearon-blue" alt="166 personas pedalearon">
-
+    <img src="https://img.shields.io/badge/Licencia-MIT-success.svg" alt="Licencia MIT"></a> 
+    <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python 3.13.5">
+    <img src="https://img.shields.io/badge/Backend-Flask-000000?logo=flask&logoColor=white" alt="Flask">
+    <img src="https://img.shields.io/badge/Hardware-Raspberry%20Pi%204B-C51A4A?logo=raspberrypi&logoColor=white" alt="Raspberry Pi 4B">
+    <img src="https://img.shields.io/badge/Estado-En%20uso%20en%20eventos-white" alt="Estado del proyecto">
+    <img src="https://img.shields.io/badge/Desarrollo-Activo-yellow" alt="Desarrollo activo">
+    <img src="https://img.shields.io/badge/Hecho%20con-%E2%9D%A4%EF%B8%8F%20en%20Uruguay-80BFFF" alt="Hecho con amor en Uruguay">
+    <img src="https://img.shields.io/badge/pedalearon-166%20personas-blue" alt="pedalearon 166 personas">
 </p>
 
+<details>
+  <summary>📑 Tabla de contenidos</summary>
 
-# DMDBike: promoviendo actividad física mediante un objetivo comunitario
+- [❔ Introducción](#-introducción)
+- [🎯 Caso de uso](#-caso-de-uso)
+- [🚧 Arquitectura general](#-arquitectura-general)
+  - [Hardware](#hardware)
+  - [Software](#software)
+- [📟 Funcionamiento del sensor (sensor.py)](#-funcionamiento-del-sensor-sensorpy)
+- [🔗 Endpoints principales (app.py)](#-endpoints-principales-apppy)
+- [🧩 Estructura del proyecto](#-estructura-del-proyecto)
+- [📺 Conexión y ejecución](#-conexión-y-ejecución)
+  - [Variables de entorno](#variables-de-entorno)
+  - [Conexión de sensor](#conexión-de-sensor)
+  - [Ejecución](#ejecución)
+  - [Despliegue con systemd](#despliegue-con-systemd)
+- [📡 Raspberry como hotspot](#-raspberry-como-hotspot)
+- [💡 Algunas consideraciones](#-algunas-consideraciones)
+- [💾 Backups](#-backups)
+- [🚀 Trabajo a futuro](#-trabajo-a-futuro)
+- [🤝 Créditos](#-créditos)
+- [📜 Licencia](#-licencia)
+- [📚 Documentación adicional](#-documentación-adicional)
+
+</details>
+
+
+## ❔ Introducción
 
 ¿Cómo promover la actividad física en un evento masivo? ¿Es posible hacerlo si se dispone de poco espacio y un tiempo limitado por cada participante? ¿Cómo hacer que sea divertido y desafiante?
 
@@ -276,7 +289,17 @@ De esta manera es posible recuperar la información de las sesiones.
 
 Es recomendable luego de cada evento realizar un backup y almacenarlo en un sitio externo a la Raspberry.
 
-## Créditos
+## 🚀 Trabajo a futuro
+- Refactorizar módulos clave para mejorar la confiabilidad, mantenibilidad y claridad del código.
+- Incorporar pruebas automatizadas (unitarias y de integración) para asegurar estabilidad ante nuevas funcionalidades.
+- Desarrollar nuevas capacidades, incluyendo:
+  - Generación automática de reportes post-evento.
+  - Cálculo de métricas adicionales (p. ej., velocidad media, tiempo activo, cadencia estimada).
+  - Soporte para múltiples participantes pedaleando de forma simultánea.
+- Incrementar la automatización operativa durante los eventos para reducir intervención manual.
+- Evolucionar hacia un producto más accesible, con un despliegue sencillo y que requiera conocimientos técnicos mínimos.
+
+## 🤝 Créditos
 
 Proyecto desarrollado en el marco del Día Mundial de la Diabetes 2025, para el Grupo de Líderes de ADU (Asociación de Diabéticos del Uruguay).
 
@@ -284,11 +307,11 @@ Desarrollado por: Mauricio Simón
 
 Las fotos del evento fueron tomadas por: [Joaquín Ormando](https://www.joaquinormando.com)
 
-## Licencia
+## 📜 Licencia
 
 Este proyecto se distribuye bajo la licencia MIT. Puedes usarlo, modificarlo y compartirlo libremente, siempre manteniendo el crédito original.
 
 MIT © 2025 Mauricio Simón Roglia
 
-## Documentación adicional
+## 📚 Documentación adicional
 - [Manual de operación](docs/MANUAL_DE_OPERACION.md)
