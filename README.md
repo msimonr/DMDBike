@@ -34,19 +34,21 @@
 
 Estas son algunas de las preguntas disparadoras que incentivaron esta propuesta.
 
-Este proyecto registra la distancia recorrida en una bicicleta común utilizando un rodillo de ciclismo, un **sensor Hall** y un **imán** en la rueda. Una **Raspberry Pi 4** procesa los datos del sensor, mantiene un registro confiable de los kilómetros y muestra la información en tiempo real en una pantalla/TV.
+Este proyecto registra la distancia recorrida en una bicicleta común utilizando un rodillo de ciclismo, un **sensor Hall** y un **imán** en la rueda.
+
+Una **Raspberry Pi 4** procesa los datos del sensor, mantiene un registro confiable de los kilómetros y muestra la información en tiempo real en una pantalla/TV.
 
 ![Pantalla principal](docs/images/DSC00293.jpg)
 
 ## 🎯 Caso de uso
 
 El proyecto se utilizó en actividades del **Día Mundial de la Diabetes 2025**, a cargo del grupo de líderes de la **Asociación de Diabéticos del Uruguay (ADU)**. 
-- El 11/11/2025 en la Plaza Libertad (Plaza Cagancha). Evento organizado por ADU. Donde 88 personas pedaleron en la bicleta.
+- El 11/11/2025 en la Plaza Libertad (Plaza Cagancha). Evento organizado por ADU. Donde 88 personas pedalearon en la bicleta.
 - El 14/11/2025 en la *Feria saludable interactiva* organizada por la Policlínica de Diabetes del Hospital Maciel, donde pedalearon 78 personas.
 
 Su propósito es fomentar la actividad física y la participación comunitaria, permitiendo que cualquier persona suba a la bicicleta, pedalee unos minutos y vea inmediatamente:
 
-- La distancia que esta recorriendo.
+- La distancia que está recorriendo.
 - La distancia acumulada por todos los participantes.
 - El nombre, foto y distancia que aportan los distintos participantes.
 - Un ranking con el nombre de los participantes que aportaron mayor distancia.
@@ -85,8 +87,8 @@ El archivo `sensor.py` detecta cada pulso del sensor Hall (flanco descendente) y
 
 ## 🔗 Endpoints principales (app.py) 
 - (/) Muestra la pantalla principal. En el centro se ve el círculo del Día Mundial de la Diabetes junto con los kilometros totales acumulados, la distancia recorrida en la sesión actual con actualizaciones en tiempo real. A la izquierda se visualiza el top de sesiones con nombre, distancia y fecha. En la derecha se encuentra una galería donde se muestran al azar los distintos participantes con su nombre, foto y distancia.
-- (/pictures) Permite guardar la sesión actual con nombre y foto del participante. Se debe guardar cuando el participante finalice ya que la distancia es almacenada automaticamente y la sesion actual es reiniciada al finalizar. Además se puede reiniciar la sesion de pedaleo (esta se reinicia automatiacamente cada 30').
-- (/carga_manual) Esta ruta permite guardar una sesión ingresando los km manualmente, la distancia aqui ingresada cuenta para el Top pero no se suma a la distancia total desplegada en la pantalla principal. Esto debe utilizarse para casos puntuales donde se haya olvidado registrar al participante cuando correspondía.
+- (/pictures) Permite guardar la sesión actual con nombre y foto del participante. Se debe guardar cuando el participante finalice, ya que la distancia se almacena automáticamente y la sesión actual se reinicia al finalizar. Además, en este endpoint se puede reiniciar la sesión de pedaleo manualmente; de lo contrario, se reiniciará automáticamente cada 30 minutos.
+- (/carga_manual) Esta ruta permite guardar una sesión ingresando los km manualmente, la distancia aquí ingresada cuenta para el Top pero no se suma a la distancia total desplegada en la pantalla principal. Esto debe utilizarse para casos puntuales donde se haya olvidado registrar al participante cuando correspondía.
 - (/sync) Dado que la RaspberryPi no contará con conexión a internet, la fecha y hora estará desincronizada con la real. Al comenzar el evento, este endpoint permite sincronizar la fecha y hora con la del celular utilizado para operar los paneles de administración.
 
 ## 🧩 Estructura del proyecto
@@ -99,6 +101,7 @@ El archivo `sensor.py` detecta cada pulso del sensor Hall (flanco descendente) y
 ├── db_init.py             # Inicialización de DB
 ├── consultas.py           # Herramientas/consultas de mantenimiento
 ├── backup_bike.sh         # Script para generar backups
+├── .env                   # Variables de entorno
 ├── templates/
 │   ├── index.html         # Pantalla principal (TV)
 │   ├── pictures.html      # Carga de sesión automática
@@ -113,7 +116,7 @@ El archivo `sensor.py` detecta cada pulso del sensor Hall (flanco descendente) y
 
 ## 📺 Conexión y ejecución
 
-En todo momento se asume que se esta utilizando una RaspberryPi 4 con sistema operativo Raspberry Pi OS.
+En todo momento se asume que se está utilizando una RaspberryPi 4 con sistema operativo Raspberry Pi OS.
 
 Asegurar las siguientes dependencias (normalmente ya vienen instaladas):
 
@@ -169,7 +172,7 @@ python app.py
 
 ### Despliegue con systemd
 
-Es recomendable configurar la raspberry para que inicialize app.py y sensor.py automaticamente, además de lanzar chromium en modo kiosk para la pantalla principal.
+Es recomendable configurar la raspberry para que inicialize app.py y sensor.py automáticamente, además de lanzar chromium en modo kiosk para la pantalla principal.
 
 Revisar las rutas que se encuentran en estos snippets para que coincidan con las que correspondan.
 
@@ -242,7 +245,7 @@ RestartSec=5
 WantedBy=graphical.target
 ```
 
-Iniciar el *daemon*, esto hara que los scripts inicien apenas la raspberry encienda y además los reiniciará en caso de que algunno falle.
+Iniciar el *daemon*, esto hará que los scripts inicien apenas la raspberry encienda y además los reiniciará en caso de que alguno falle.
 
 ```bash
 sudo systemctl daemon-reload
@@ -256,11 +259,11 @@ Es fuertemente recomendable crear un punto de acceso Wi-Fi para operar desde el 
 
 ## 💡 Algunas consideraciones
 
-- El sistema deberiá arrancar solo, con el fin de ser operado sin necesidad de mouse o teclado.
+- El sistema debería arrancar solo, con el fin de ser operado sin necesidad de mouse o teclado.
 - La hora debe sincronizarse al inicio del encendido, ya que sin conectarse a internet la raspberry tendrá la fecha y hora del úsltimo instante en el que estaba encendida.
 - Las fotos se comprimen en WEBP para optimizar el tamaño, aun así, es recomendable utilizar una micro sd con tamaño suficiente para evitar inconvenientes. Para este proyecto se utilizó una micro sd de 128 Gb.
-- La sesión activa se reinicia automaticamente cada 30 minutos, para evitar datos incorrectos en caso de que nadie haya guardado la sesión.
-- Es recomendable que, cada vez que se sube un participante se reinicie la sesión, para evitar que ésta se reinicie automaticamente mientras el participante está pedaleando.
+- La sesión activa se reinicia automáticamente cada 30 minutos, para evitar datos incorrectos en caso de que nadie haya guardado la sesión.
+- Es recomendable que, cada vez que se sube un participante se reinicie la sesión, para evitar que ésta lo haga automáticamente mientras el participante está pedaleando.
 
 ## 💾 Backups
 
@@ -275,8 +278,7 @@ Es recomendable luego de cada evento realizar un backup y almacenarlo en un siti
 
 ## Créditos
 
-Proyecto desarrollado en el marco del Día Mundial de la Diabetes 2025.
-Para el Grupo de Líderes de ADU (Asociación de Diabéticos del Uruguay).
+Proyecto desarrollado en el marco del Día Mundial de la Diabetes 2025, para el Grupo de Líderes de ADU (Asociación de Diabéticos del Uruguay).
 
 Desarrollado por: Mauricio Simón
 
