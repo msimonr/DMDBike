@@ -2,7 +2,10 @@
 import sqlite3
 from datetime import datetime, UTC
 import time
-import RPi.GPIO as GPIO
+
+from gpiozero import Button
+from signal import pause
+
 import os
 from dotenv import load_dotenv
 
@@ -44,27 +47,23 @@ def sensor_callback(channel):
         print("Error guardando distancia:", e)
 
 def main():
-    # setup GPIO
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(SENSOR_PIN, GPIO.IN)
     
-    # detectar flanco descendente (HIGH -> LOW)
-    GPIO.add_event_detect(
+    sensor = Button(
         SENSOR_PIN,
-        GPIO.FALLING,
-        callback=sensor_callback,
-        bouncetime=DEBOUNCE_MS
+        pull_up=True,
+        bounce_time=DEBOUNCE_MS / 1000.0,  # gpiozero usa segundos
     )
+    
+    sensor.when_pressed = sensor_callback
 
     print("Sensor listo. Esperando pulsos... Ctrl+C para salir.")
     
     try:
-        while True:
-            time.sleep(1)
+        pause()  # bloquea el hilo principal mientras se manejan las callbacks
     except KeyboardInterrupt:
         print("Saliendo...")
     finally:
-        GPIO.cleanup()
+        sensor.close()  # libera recursos GPIO
 
 if __name__ == "__main__":
     main()
