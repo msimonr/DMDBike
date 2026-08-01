@@ -8,7 +8,11 @@ mkdir -p "$DEST"
 
 ARCHIVO="$DEST/bike_backup_$FECHA.tar.gz"
 
+BACK_PATH="$SCRIPT_DIR/../backend"
+
 #compresion
-tar -czf "$ARCHIVO" -C "$SCRIPT_DIR" bici.db static/uploads
+tar -czf "$ARCHIVO" \
+    -C "$BACK_PATH" bici.db \
+    -C "$BACK_PATH" static/uploads
 
 echo "Backup generado: $ARCHIVO"

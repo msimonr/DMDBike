@@ -1,5 +1,6 @@
 # app.py
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session
+from flask_cors import CORS
 import sqlite3
 import os
 import uuid
@@ -18,6 +19,7 @@ MAX_MINUTOS_SESION = int(os.getenv("MAX_MINUTOS_SESION", "30"))
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app = Flask(__name__)
+CORS(app)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-no-usar-en-produccion")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -67,6 +69,10 @@ def get_or_refresh_sesion(refresh=True): # Si no hay sesion la crea, si hay la d
     return {"km_inicio": km_inicio, "iniciada_en": iniciada_en, "minutos": mins}
 
 
+
+@app.route("/status")
+def status():
+    return jsonify({"ok": True})
 
 @app.route("/sync")
 def sync_view():
