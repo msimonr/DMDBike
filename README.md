@@ -6,12 +6,10 @@
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/Licencia-MIT-success.svg" alt="Licencia MIT"></a> 
     <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white" alt="Python 3.13.5">
-    <img src="https://img.shields.io/badge/Backend-Flask-000000?logo=flask&logoColor=white" alt="Flask">
     <img src="https://img.shields.io/badge/Hardware-Raspberry%20Pi%204B-C51A4A?logo=raspberrypi&logoColor=white" alt="Raspberry Pi 4B">
-    <img src="https://img.shields.io/badge/Estado-En%20uso%20en%20eventos-white" alt="Estado del proyecto">
     <img src="https://img.shields.io/badge/Desarrollo-Activo-yellow" alt="Desarrollo activo">
-    <img src="https://img.shields.io/badge/Hecho%20con-%E2%9D%A4%EF%B8%8F%20en%20Uruguay-80BFFF" alt="Hecho con amor en Uruguay">
     <img src="https://img.shields.io/badge/pedalearon-166%20personas-blue" alt="pedalearon 166 personas">
+    <img src="https://img.shields.io/badge/Hecho%20con-%E2%9D%A4%EF%B8%8F%20en%20Uruguay-80BFFF" alt="Hecho con amor en Uruguay">
 </p>
 
 <details>
