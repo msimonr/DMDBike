@@ -21,6 +21,9 @@ backend/bici.db
 # Archivos subidos por usuarios
 backend/static/uploads/
 
+# Fotos de los usuarios con plantilla
+imagen/*
+
 # Flask
 backend/instance/
 
@@ -50,6 +53,7 @@ frontend/.env.*.local
 # ==========================
 
 backups_bike/
+
 
 # ==========================
 # IDEs
