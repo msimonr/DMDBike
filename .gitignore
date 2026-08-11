@@ -1,5 +1,5 @@
 # ==========================
-# Python / Backend
+# Python / app
 # ==========================
 
 # Bytecode
@@ -12,20 +12,20 @@ venv/
 env/
 
 # Variables de entorno
-backend/.env
-backend/.env.*
+app/.env
+app/.env.*
 
 # Base de datos local
-backend/bici.db
+app/bici.db
 
 # Archivos subidos por usuarios
-backend/static/uploads/
+app/static/uploads/
 
 # Fotos de los usuarios con plantilla
 imagen/*
 
 # Flask
-backend/instance/
+app/instance/
 
 # Logs y cobertura
 *.log
