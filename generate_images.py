@@ -4,15 +4,14 @@ from datetime import datetime
 import sqlite3
 import base64
 
-
 # ============================================================
 # CONFIGURACIÓN
 # ============================================================
 
-DB_PATH = "backend/bici.db"
+DB_PATH = Path("app/bici.db")
 
 PLANTILLA_PATH = Path("plantilla.png")
-UPLOADS_PATH = Path("backend/static/uploads")
+UPLOADS_PATH = Path("app/static/uploads")
 OUTPUT_PATH = Path("imagen")
 
 PLANTILLA_W = 868
@@ -25,6 +24,7 @@ FOTO_H = 1024
 # ============================================================
 # FORMATTERS
 # ============================================================
+
 
 def format_fecha(fecha):
     fecha = datetime.fromisoformat(fecha)
@@ -42,6 +42,7 @@ def format_km(km):
 # IMAGEN → BASE64
 # ============================================================
 
+
 def imagen_base64(path):
 
     extension = path.suffix.lower()
@@ -55,9 +56,7 @@ def imagen_base64(path):
     else:
         raise ValueError(f"Formato no soportado: {extension}")
 
-    data = base64.b64encode(
-        path.read_bytes()
-    ).decode("utf-8")
+    data = base64.b64encode(path.read_bytes()).decode("utf-8")
 
     return f"data:{mime};base64,{data}"
 
@@ -91,14 +90,9 @@ print(f"Sesiones encontradas: {len(sesiones)}")
 # PREPARAR ARCHIVOS
 # ============================================================
 
-plantilla_base64 = imagen_base64(
-    PLANTILLA_PATH
-)
+plantilla_base64 = imagen_base64(PLANTILLA_PATH)
 
-OUTPUT_PATH.mkdir(
-    parents=True,
-    exist_ok=True
-)
+OUTPUT_PATH.mkdir(parents=True, exist_ok=True)
 
 
 # ============================================================
@@ -107,18 +101,11 @@ OUTPUT_PATH.mkdir(
 
 with sync_playwright() as p:
 
-    browser = p.firefox.launch(
-        headless=True
-    )
+    browser = p.firefox.launch(headless=True)
 
     page = browser.new_page(
-        viewport={
-            "width": PLANTILLA_W,
-            "height": PLANTILLA_H
-        },
-        device_scale_factor=1
+        viewport={"width": PLANTILLA_W, "height": PLANTILLA_H}, device_scale_factor=1
     )
-
 
     # ========================================================
     # RECORRER SESIONES
@@ -126,11 +113,7 @@ with sync_playwright() as p:
 
     for s in sesiones:
 
-        print(
-            f"Procesando ID {s['id']} - "
-            f"{s['nombre']}"
-        )
-
+        print(f"Procesando ID {s['id']} - " f"{s['nombre']}")
 
         # ----------------------------------------------------
         # Buscar foto
@@ -138,15 +121,11 @@ with sync_playwright() as p:
 
         foto_path = UPLOADS_PATH / s["foto"]
 
-
         if not foto_path.exists():
 
-            print(
-                f"  ⚠️ No se encontró: {foto_path}"
-            )
+            print(f"  ⚠️ No se encontró: {foto_path}")
 
             continue
-
 
         # ----------------------------------------------------
         # Datos
@@ -154,23 +133,15 @@ with sync_playwright() as p:
 
         nombre = s["nombre"] or "El/ella"
 
-        km = format_km(
-            s["km"]
-        )
+        km = format_km(s["km"])
 
-        fecha = format_fecha(
-            s["creado_en"]
-        )
-
+        fecha = format_fecha(s["creado_en"])
 
         # ----------------------------------------------------
         # Foto
         # ----------------------------------------------------
 
-        foto_base64 = imagen_base64(
-            foto_path
-        )
-
+        foto_base64 = imagen_base64(foto_path)
 
         # ----------------------------------------------------
         # HTML
@@ -307,42 +278,24 @@ with sync_playwright() as p:
         </html>
         """
 
-
         # ----------------------------------------------------
         # Renderizar
         # ----------------------------------------------------
 
-        page.set_content(
-            html
-        )
-
+        page.set_content(html)
 
         # Esperar fuentes
-        page.evaluate(
-            "() => document.fonts.ready"
-        )
-
+        page.evaluate("() => document.fonts.ready")
 
         # ----------------------------------------------------
         # Guardar
         # ----------------------------------------------------
 
-        output_file = (
-            OUTPUT_PATH /
-            f"{s['id']}-{s['nombre']}.png"
-        )
+        output_file = OUTPUT_PATH / f"{s['id']}-{s['nombre']}.png"
 
+        page.screenshot(path=str(output_file), full_page=True)
 
-        page.screenshot(
-            path=str(output_file),
-            full_page=True
-        )
-
-
-        print(
-            f"  ✓ Generada: {output_file}"
-        )
-
+        print(f"  ✓ Generada: {output_file}")
 
     browser.close()
 
